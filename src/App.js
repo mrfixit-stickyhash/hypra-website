@@ -57,16 +57,6 @@ function App() {
         <div className="logo-wrapper">
           <img src={`${process.env.PUBLIC_URL}/resized_hypra_logo.png`} alt="Logo" className="logo" />
         </div>
-        <div className="cube-container">
-          <div className="cube">
-            <div className="face"></div>
-            <div className="face"></div>
-            <div className="face"></div>
-            <div className="face"></div>
-            <div className="face"></div>
-            <div className="face"></div>
-          </div>
-        </div>
         <div className="intro-text">
           <h2>New standard in EVM blockchains.</h2>
           <p>Hyper is proof of work, tokens, NFTs, and smart contracts all on one network</p>
@@ -254,3 +244,4 @@ function App() {
 }
 
 export default App;
+

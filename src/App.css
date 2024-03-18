@@ -40,115 +40,110 @@ body * {
 }
 
 .navigation a, .navigation button {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-  background-color: #007bff;
-  border: none;
-  padding: 12px 30px; /* Increased padding to vertically center the text and increase button width */
-  min-width: 120px; /* Minimum width for buttons */
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: 'Ubuntu', sans-serif;
-  display: flex; /* Use flexbox for centering */
-  align-items: center; /* Center text vertically */
-  justify-content: center; /* Center text horizontally */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  font-size: 16px; /* Adjust font size if needed */
-  line-height: 1; /* Adjust line height to ensure it's centered vertically */
-  height: auto; /* Adjust height to fit content */
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    background-color: #007bff;
+    border: none;
+    padding: 12px 30px;
+    min-width: 120px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1;
+    height: auto;
+    position: relative; /* Required for the shine effect */
+    overflow: hidden; /* Contains the shine effect within the button bounds */
+    transition: background-color 0.3s ease; /* Ensures a smooth color transition */
 }
 
-.navigation a:hover, .navigation button:hover {
-  background-color: #0056b3;
+.navigation a::before, .navigation button::before {
+    content: '';
+    position: absolute;
+    top: -50%; 
+    left: -75%;
+    width: 150%; 
+    height: 200%; 
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: rotate(30deg);
+    pointer-events: none; /* Prevents the pseudo-element from interfering with button functionality */
+}
+
+.navigation a:hover::before, .navigation button:hover::before {
+    animation: shine-move 0.75s ease forwards;
+}
+
+@keyframes shine-move {
+    from {
+        left: -75%;
+    }
+    to {
+        left: 125%;
+    }
 }
 
 .main-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Take full height of viewport */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Center content vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around; /* Distributes space evenly between items */
+  height: 100vh;
+  width: 100%;
 }
 
 .logo-wrapper {
-    position: absolute;
-    top: 80px; /* Adjust as needed */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 300; /* Ensure logo is above the cube */
+  display: flex;
+  justify-content: center;
+  z-index: 300;
+  /* Additional adjustments for margin/padding can be made here */
+}
+
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  z-index: 300;
+  /* Additional adjustments for margin/padding can be made here */
 }
 
 .logo {
-    width: 200px; /* Adjust logo size */
-    height: auto;
+  width: 400px; /* Adjusts the logo size */
+  height: auto; /* Maintains the aspect ratio */
+  animation: pulseGlow 2s infinite alternate; /* Applies the pulsing glow effect */
 }
 
-.cube-container {
-    margin-top: 150px; /* Adjust as needed */
-    z-index: 200; /* Ensure cube is below the logo */
+@keyframes pulseGlow {
+  0%, 100% {
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  }
+  50% {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  }
 }
 
-.cube {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    animation: cube 45s infinite linear;
+
+
+
+
+
+.intro-text {
+  /* If you had absolute positioning here, consider removing it */
+  text-align: center;
+  color: white;
+  width: 80%; /* Adjust based on your design preference */
+  /* Add margin or padding as needed to fine-tune the positioning */
 }
 
-@keyframes cube {
-    from { transform: rotateX(0deg) rotateZ(0deg); }
-    to { transform: rotateX(720deg) rotateZ(360deg); }
-}
 
-.cube div {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background-color: #94b1ffcc;
-    background-image: linear-gradient(calc(var(--dir1, 0) * -90deg + 45deg), transparent 23%, #fff7 0 24%, transparent 0 26%, #0007 0 27%, transparent 0);
-    box-shadow: 0 0 5em #0008 inset;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
 
-/* Cube face positions */
-.cube div:nth-child(1) { transform: translateZ(100px); }
-.cube div:nth-child(2) { transform: rotateY(90deg) translateZ(100px) rotate(-90deg); }
-.cube div:nth-child(3) { transform: rotateY(180deg) translateZ(100px) rotate(180deg); }
-.cube div:nth-child(4) { transform: rotateY(-90deg) translateZ(100px) rotate(-90deg); }
-.cube div:nth-child(5) { transform: rotateX(90deg) translateZ(100px) rotate(-90deg); }
-.cube div:nth-child(6) { transform: rotateX(-90deg) translateZ(100px) rotate(90deg); }
+/* Continue with other styles... */
 
-/* Animated text effects on cube faces (simplified for clarity) */
-.cube div::before, .cube div::after {
-    content: "#HYPRA $HYP #HYPRA $HYP #HYPRA $HYP";
-    position: absolute;
-    left: 25%;
-    transform-origin: left;
-    outline: 2px solid;
-    font-size: 2em;
-    white-space: nowrap;
-    background-image: repeating-linear-gradient(to right, white 0 10px, black 0 10px);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: text 20s infinite linear;
-}
 
-.cube div::after {
-    left: 75%;
-}
 
-@keyframes text {
-    from { transform: translateY(-50%) rotate(calc(var(--dir1, 0) * 90deg + var(--dir2, 45deg))) translateX(-200px); }
-    to { transform: translateY(-50%) rotate(calc(var(--dir1, 0) * 90deg + var(--dir2, 45deg))) translateX(-400px); }
-}
 
 /* Connect Page Styles */
 .connect-page {
@@ -197,17 +192,16 @@ body * {
 
 
 .intro-text {
-    position: absolute;
-    top: 85%; /* Adjust this value to move the text lower without affecting the cube */
-    width: 100%; /* Ensures the text is centered in the container */
-    text-align: center;
-    color: white;
-    padding: 0 20px; /* Ensures padding on smaller screens */
+  /* If you had absolute positioning here, consider removing it */
+  text-align: center;
+  color: white;
+  width: 80%; /* Adjust based on your design preference */
+  /* Add margin or padding as needed to fine-tune the positioning */
 }
 
 .intro-text h2 {
     font-size: 2.5rem; /* Large, readable font size */
-    margin-bottom: 10px; /* Space between the headline and the paragraph */
+    margin-bottom: 40px; /* Space between the headline and the paragraph */
     color: hwb(27 0% 0%); /* Stylish color for the headline */
 }
 
@@ -568,3 +562,6 @@ body * {
     width: 45%; /* Adjust width so they stack nicely on smaller screens */
   }
 }
+
+
+
